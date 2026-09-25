@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>Trung Thu 🌕</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      touch-action: none;
+    }
+
+    body {
+      font-family: "Segoe UI", "Poppins", sans-serif;
+      background: #02000d;
+      color: white;
+    }
+
+    /* =========================
+       VŨ TRỤ
+    ========================= */
+
+    .universe {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+
+      background:
+        radial-gradient(
+          circle at 50% 50%,
+          #28104f 0%,
+          #13052e 30%,
+          #070019 60%,
+          #010008 100%
+        );
+    }
+
+    /* Tinh vân */
+
+    .nebula {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    .nebula.one {
+      width: 550px;
+      height: 300px;
+      left: -150px;
+      top: 10%;
+
+      background: #7c3aed;
+      opacity: .38;
+
+      transform: rotate(-25deg);
+
+      animation:
+        nebulaOne 10s ease-in-out infinite alternate;
+    }
+
+    .nebula.two {
+      width: 550px;
+      height: 320px;
+      right: -150px;
+      bottom: 5%;
+
+      background: #ec4899;
+      opacity: .3;
+
+      transform: rotate(25deg);
+
+      animation:
+        nebulaTwo 13s ease-in-out infinite alternate;
+    }
+
+    .nebula.three {
+      width: 350px;
+      height: 350px;
+
+      top: 35%;
+      left: 50%;
+
+      transform: translate(-50%, -50%);
+
+      background: #2563eb;
+      opacity: .2;
+
+      animation:
+        nebulaPulse 8s ease-in-out infinite;
+    }
+
+    /* =========================
+       LỚP SAO TƯƠNG TÁC
+    ========================= */
+
+    .star-field {
+      position: absolute;
+      inset: -20%;
+
+      transition:
+        transform .08s linear;
+
+      will-change: transform;
+    }
+
+    .star {
+      position: absolute;
+
+      border-radius: 50%;
+
+      background: white;
+
+      box-shadow:
+        0 0 5px rgba(255,255,255,.8),
+        0 0 12px rgba(190,180,255,.6);
+
+      animation:
+        twinkle var(--twinkle) ease-in-out infinite;
+    }
+
+    /* =========================
+       SAO BĂNG
+    ========================= */
+
+    .shooting-star {
+      position: absolute;
+
+      width: 130px;
+      height: 2px;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(255,255,255,.5),
+          white
+        );
+
+      transform: rotate(-35deg);
+
+      filter:
+        drop-shadow(0 0 8px white);
+
+      opacity: 0;
+
+      animation:
+        shooting 6s linear infinite;
+    }
+
+    .shooting-star:nth-child(1) {
+      top: 15%;
+      left: 5%;
+      animation-delay: 1s;
+    }
+
+    .shooting-star:nth-child(2) {
+      top: 35%;
+      left: 70%;
+      animation-delay: 3.5s;
+    }
+
+    .shooting-star:nth-child(3) {
+      top: 60%;
+      left: 30%;
+      animation-delay: 6s;
+    }
+
+    /* =========================
+       MẶT TRĂNG
+    ========================= */
+
+    .moon {
+      position: absolute;
+
+      width: 105px;
+      height: 105px;
+
+      top: 45px;
+      right: 55px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle at 30% 30%,
+          #ffffff 0%,
+          #fffbdc 35%,
+          #f1dc9c 100%
+        );
+
+      box-shadow:
+        0 0 20px #fff8cf,
+        0 0 60px rgba(255,245,190,.55),
+        0 0 120px rgba(255,245,190,.25);
+
+      animation:
+        moonFloat 5s ease-in-out infinite;
+
+      z-index: 3;
+    }
+
+    .moon::before {
+      content: "";
+
+      position: absolute;
+
+      width: 20px;
+      height: 20px;
+
+      top: 20px;
+      left: 28px;
+
+      border-radius: 50%;
+
+      background: rgba(160,130,80,.12);
+
+      box-shadow:
+        38px 20px 0 rgba(160,130,80,.12),
+        17px 52px 0 rgba(160,130,80,.1),
+        58px 55px 0 rgba(160,130,80,.12);
+    }
+
+    /* =========================
+       TRÁI TIM
+    ========================= */
+
+    .heart-container {
+      position: absolute;
+      inset: 0;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      z-index: 5;
+
+      pointer-events: none;
+    }
+
+    .heart-wrapper {
+      position: relative;
+
+      width: min(620px, 95vw);
+      height: min(620px, 90vh);
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Glow phía sau tim */
+
+    .heart-glow {
+      position: absolute;
+
+      width: 390px;
+      height: 390px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(244,63,94,.28);
+
+      filter: blur(75px);
+
+      animation:
+        glowBeat 1.15s ease-in-out infinite;
+    }
+
+    /* Trái tim */
+
+    .heart {
+      position: absolute;
+
+      width: 300px;
+      height: 300px;
+
+      border-radius: 45px 0 45px 0;
+
+      background:
+        linear-gradient(
+          135deg,
+          #ff1744,
+          #ff3d68 35%,
+          #e11d48 70%,
+          #9f1239
+        );
+
+      transform: rotate(-45deg);
+
+      box-shadow:
+        -15px 15px 50px rgba(255,23,68,.5),
+        15px -15px 50px rgba(244,63,94,.35),
+        inset 10px 10px 25px rgba(255,255,255,.14),
+        inset -12px -12px 30px rgba(80,0,30,.25);
+
+      animation:
+        heartbeat 1.15s ease-in-out infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+
+      position: absolute;
+
+      width: 300px;
+      height: 300px;
+
+      border-radius: 50%;
+
+      background: inherit;
+    }
+
+    .heart::before {
+      top: -150px;
+      left: 0;
+    }
+
+    .heart::after {
+      top: 0;
+      left: 150px;
+    }
+
+    /* =========================
+       CHỮ TRONG TRÁI TIM
+    ========================= */
+
+    .message {
+      position: relative;
+
+      z-index: 10;
+
+      width: min(430px, 72vw);
+
+      text-align: center;
+
+      color: white;
+
+      padding: 20px;
+
+      text-shadow:
+        0 2px 6px rgba(90,0,20,.9),
+        0 0 12px rgba(255,255,255,.15);
+
+      animation:
+        messageFloat 4s ease-in-out infinite;
+    }
+
+    .message h1 {
+      font-size:
+        clamp(19px, 3.4vw, 28px);
+
+      line-height: 1.5;
+
+      font-weight: 800;
+
+      letter-spacing: .2px;
+    }
+
+    /* =========================
+       TIM NHỎ BAY
+    ========================= */
+
+    .tiny-heart {
+      position: absolute;
+
+      color: #ff9ab2;
+
+      font-size: 18px;
+
+      filter:
+        drop-shadow(0 0 8px #ff416c);
+
+      opacity: 0;
+
+      animation:
+        floatHeart 5s linear infinite;
+    }
+
+    .tiny-heart:nth-child(1) {
+      left: 15%;
+      bottom: 20%;
+    }
+
+    .tiny-heart:nth-child(2) {
+      left: 80%;
+      bottom: 15%;
+      animation-delay: 1.5s;
+    }
+
+    .tiny-heart:nth-child(3) {
+      left: 25%;
+      bottom: 5%;
+      animation-delay: 3s;
+    }
+
+    .tiny-heart:nth-child(4) {
+      left: 70%;
+      bottom: 25%;
+      animation-delay: 4s;
+    }
+
+    /* =========================
+       HƯỚNG DẪN
+    ========================= */
+
+    .hint {
+      position: absolute;
+
+      z-index: 20;
+
+      left: 50%;
+      bottom: 25px;
+
+      transform: translateX(-50%);
+
+      padding: 9px 18px;
+
+      border-radius: 30px;
+
+      color: rgba(255,255,255,.72);
+
+      font-size: 12px;
+
+      letter-spacing: .5px;
+
+      background:
+        rgba(255,255,255,.06);
+
+      border:
+        1px solid rgba(255,255,255,.12);
+
+      backdrop-filter: blur(10px);
+
+      animation:
+        hintFade 4s ease forwards;
+
+      pointer-events: none;
+    }
+
+    /* =========================
+       ANIMATION
+    ========================= */
+
+    @keyframes heartbeat {
+
+      0%, 100% {
+        transform:
+          rotate(-45deg)
+          scale(1);
+      }
+
+      15% {
+        transform:
+          rotate(-45deg)
+          scale(1.08);
+      }
+
+      30% {
+        transform:
+          rotate(-45deg)
+          scale(1);
+      }
+
+      45% {
+        transform:
+          rotate(-45deg)
+          scale(1.12);
+      }
+
+      70% {
+        transform:
+          rotate(-45deg)
+          scale(1);
+      }
+    }
+
+    @keyframes glowBeat {
+
+      0%, 100% {
+        transform: scale(.85);
+        opacity: .4;
+      }
+
+      15% {
+        transform: scale(1.05);
+        opacity: .75;
+      }
+
+      45% {
+        transform: scale(1.15);
+        opacity: .9;
+      }
+
+      70% {
+        transform: scale(.9);
+        opacity: .45;
+      }
+    }
+
+    @keyframes twinkle {
+
+      0%, 100% {
+        opacity: .15;
+        transform: scale(.7);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.5);
+      }
+    }
+
+    @keyframes shooting {
+
+      0% {
+        transform:
+          translate(0,0)
+          rotate(-35deg);
+
+        opacity: 0;
+      }
+
+      5% {
+        opacity: 1;
+      }
+
+      20% {
+        transform:
+          translate(550px,380px)
+          rotate(-35deg);
+
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes moonFloat {
+
+      0%,100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+
+    @keyframes nebulaOne {
+
+      from {
+        transform:
+          translate(0,0)
+          rotate(-25deg);
+      }
+
+      to {
+        transform:
+          translate(80px,-40px)
+          rotate(-15deg);
+      }
+    }
+
+    @keyframes nebulaTwo {
+
+      from {
+        transform:
+          translate(0,0)
+          rotate(25deg);
+      }
+
+      to {
+        transform:
+          translate(-70px,40px)
+          rotate(15deg);
+      }
+    }
+
+    @keyframes nebulaPulse {
+
+      0%,100% {
+        transform:
+          translate(-50%,-50%)
+          scale(.85);
+      }
+
+      50% {
+        transform:
+          translate(-50%,-50%)
+          scale(1.2);
+      }
+    }
+
+    @keyframes messageFloat {
+
+      0%,100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-4px);
+      }
+    }
+
+    @keyframes floatHeart {
+
+      0% {
+        transform:
+          translateY(0)
+          scale(.5);
+
+        opacity: 0;
+      }
+
+      20% {
+        opacity: .9;
+      }
+
+      100% {
+        transform:
+          translateY(-250px)
+          scale(1.3)
+          rotate(25deg);
+
+        opacity: 0;
+      }
+    }
+
+    @keyframes hintFade {
+
+      0% {
+        opacity: 0;
+      }
+
+      20% {
+        opacity: 1;
+      }
+
+      75% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 600px) {
+
+      .moon {
+        width: 65px;
+        height: 65px;
+
+        top: 20px;
+        right: 20px;
+      }
+
+      .heart-wrapper {
+        width: 100vw;
+        height: 88vh;
+      }
+
+      .heart {
+        width: 245px;
+        height: 245px;
+      }
+
+      .heart::before,
+      .heart::after {
+        width: 245px;
+        height: 245px;
+      }
+
+      .heart::before {
+        top: -122.5px;
+      }
+
+      .heart::after {
+        left: 122.5px;
+      }
+
+      .heart-glow {
+        width: 330px;
+        height: 330px;
+      }
+
+      .message {
+        width: 72vw;
+        padding: 12px;
+      }
+
+      .message h1 {
+        font-size: 19px;
+        line-height: 1.5;
+      }
+
+      .hint {
+        bottom: 18px;
+        font-size: 11px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="universe">
+
+    <!-- =====================
+         LỚP SAO
+    ====================== -->
+
+    <div class="star-field" id="starField"></div>
+
+    <!-- Tinh vân -->
+
+    <div class="nebula one"></div>
+    <div class="nebula two"></div>
+    <div class="nebula three"></div>
+
+    <!-- Sao băng -->
+
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+
+    <!-- Mặt trăng -->
+
+    <div class="moon"></div>
+
+
+    <!-- =====================
+         TRÁI TIM
+    ====================== -->
+
+    <div class="heart-container">
+
+      <div class="heart-wrapper">
+
+        <div class="heart-glow"></div>
+
+        <div class="heart"></div>
+
+
+        <!-- LỜI CHÚC -->
+
+        <div class="message">
+
+          <h1>
+            Chúc bé một mùa Trung Thu thật vui vẻ,
+            luôn giữ nụ cười trên môi,
+            luôn bình an nhé! 🌕
+          </h1>
+
+        </div>
+
+
+        <!-- Tim nhỏ -->
+
+        <span class="tiny-heart">♥</span>
+        <span class="tiny-heart">♥</span>
+        <span class="tiny-heart">♥</span>
+        <span class="tiny-heart">♥</span>
+
+      </div>
+
+    </div>
+
+
+    <!-- Hướng dẫn -->
+
+    <div class="hint">
+      ✨ Vuốt màn hình để chạm vào những vì sao ✨
+    </div>
+
+  </div>
+
+
+  <script>
+
+    /* ==================================================
+       TẠO NGÂN HÀ SAO
+    ================================================== */
+
+    const starField =
+      document.getElementById("starField");
+
+    const STAR_COUNT = 140;
+
+    for (let i = 0; i < STAR_COUNT; i++) {
+
+      const star =
+        document.createElement("div");
+
+      star.className = "star";
+
+      const size =
+        Math.random() * 2.5 + .5;
+
+      star.style.width =
+        size + "px";
+
+      star.style.height =
+        size + "px";
+
+      star.style.left =
+        Math.random() * 100 + "%";
+
+      star.style.top =
+        Math.random() * 100 + "%";
+
+      star.style.setProperty(
+        "--twinkle",
+        (Math.random() * 3 + 2) + "s"
+      );
+
+      star.style.animationDelay =
+        Math.random() * 4 + "s";
+
+      starField.appendChild(star);
+    }
+
+
+    /* ==================================================
+       HIỆU ỨNG VUỐT SAO
+    ================================================== */
+
+    let currentX = 0;
+    let currentY = 0;
+
+    let targetX = 0;
+    let targetY = 0;
+
+    let startX = 0;
+    let startY = 0;
+
+    let lastX = 0;
+    let lastY = 0;
+
+    let touching = false;
+
+    /*
+      Khi vuốt:
+
+      - Ngón tay đi sang phải
+        => toàn bộ ngân hà bị kéo sang phải
+
+      - Ngón tay đi sang trái
+        => sao chạy sang trái
+
+      - Vuốt lên/xuống
+        => sao cũng di chuyển theo
+    */
+
+    document.addEventListener(
+      "touchstart",
+      function(e) {
+
+        if (!e.touches.length) return;
+
+        touching = true;
+
+        startX =
+          e.touches[0].clientX;
+
+        startY =
+          e.touches[0].clientY;
+
+        lastX = startX;
+        lastY = startY;
+
+      },
+      { passive: false }
+    );
+
+
+    document.addEventListener(
+      "touchmove",
+      function(e) {
+
+        if (!touching) return;
+
+        e.preventDefault();
+
+        const touch =
+          e.touches[0];
+
+        const x =
+          touch.clientX;
+
+        const y =
+          touch.clientY;
+
+        const dx =
+          x - lastX;
+
+        const dy =
+          y - lastY;
+
+        /*
+          Cộng dồn hướng vuốt.
+          Nhân hệ số để chuyển động
+          của vũ trụ rõ ràng hơn.
+        */
+
+        targetX += dx * 1.35;
+        targetY += dy * 1.35;
+
+        /*
+          Giới hạn để sao không
+          bay khỏi màn hình quá xa.
+        */
+
+        targetX =
+          Math.max(-350,
+          Math.min(350, targetX));
+
+        targetY =
+          Math.max(-350,
+          Math.min(350, targetY));
+
+        lastX = x;
+        lastY = y;
+
+      },
+      { passive: false }
+    );
+
+
+    document.addEventListener(
+      "touchend",
+      function() {
+
+        touching = false;
+
+        /*
+          Sau khi thả tay,
+          ngân hà từ từ trở lại
+          vị trí ban đầu.
+        */
+
+      },
+      { passive: false }
+    );
+
+
+    /* ==================================================
+       ANIMATION MƯỢT CHO NGÂN HÀ
+    ================================================== */
+
+    function animateStars() {
+
+      /*
+        Nội suy để chuyển động
+        không bị giật.
+      */
+
+      currentX +=
+        (targetX - currentX) * .12;
+
+      currentY +=
+        (targetY - currentY) * .12;
+
+
+      /*
+        Khi không chạm màn hình,
+        sao từ từ trôi về vị trí
+        cân bằng.
+      */
+
+      if (!touching) {
+
+        targetX *= .985;
+        targetY *= .985;
+
+      }
+
+
+      starField.style.transform =
+        `translate3d(
+          ${currentX}px,
+          ${currentY}px,
+          0
+        )`;
+
+
+      requestAnimationFrame(
+        animateStars
+      );
+    }
+
+    animateStars();
+
+
+    /* ==================================================
+       KHI VUỐT MẠNH → TẠO THÊM CẢM GIÁC "BÙNG SAO"
+    ================================================== */
+
+    let lastSpark = 0;
+
+    document.addEventListener(
+      "touchmove",
+      function(e) {
+
+        const now =
+          Date.now();
+
+        if (now - lastSpark < 80)
+          return;
+
+        lastSpark = now;
+
+        const touch =
+          e.touches[0];
+
+        const spark =
+          document.createElement("div");
+
+        spark.style.position =
+          "fixed";
+
+        spark.style.left =
+          touch.clientX + "px";
+
+        spark.style.top =
+          touch.clientY + "px";
+
+        spark.style.width =
+          "3px";
+
+        spark.style.height =
+          "3px";
+
+        spark.style.borderRadius =
+          "50%";
+
+        spark.style.background =
+          "white";
+
+        spark.style.boxShadow =
+          "0 0 12px 4px rgba(255,255,255,.8)";
+
+        spark.style.pointerEvents =
+          "none";
+
+        spark.style.zIndex =
+          "100";
+
+        document.body.appendChild(
+          spark
+        );
+
+
+        spark.animate(
+          [
+            {
+              transform: "scale(1)",
+              opacity: 1
+            },
+            {
+              transform:
+                `translate(
+                  ${(Math.random() - .5) * 80}px,
+                  ${(Math.random() - .5) * 80}px
+                ) scale(0)`,
+              opacity: 0
+            }
+          ],
+          {
+            duration: 500,
+            easing: "ease-out"
+          }
+        );
+
+
+        setTimeout(
+          () => spark.remove(),
+          500
+        );
+
+      },
+      { passive: true }
+    );
+
+  </script>
+
+</body>
+</html>
